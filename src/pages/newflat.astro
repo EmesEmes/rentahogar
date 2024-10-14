@@ -1,0 +1,53 @@
+---
+import MainLayout from "../layout/MainLayout.astro"
+---
+
+<MainLayout>
+  <div class=" flex items-center flex-col w-[100%] ">
+    <h1 class="mt-10 font-bold text-3xl text-indigo-700">Publish a New Flat</h1>
+    <form id="publish-flat-form" class="flex flex-col mt-10 p-10 border-2 border-indigo-700 rounded-3xl bg-white">
+        <div class="flex justify-between mb-4">
+            <label for="city" >City</label>
+            <input required type="text" id="city" name="city" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="streetname" >Street Name</label>
+            <input required type="text" id="streetname" name="streetname" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 ">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="streetnumber" >Street Number</label>
+            <input required type="number" id="streetnumber" name="streetnumber" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="area" >Area size</label>
+            <input required type="number" id="area" name="area" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="hasac">Has AC?</label>
+            <div>
+              <input type="checkbox" id="hasac" name="hasac" class="border border-gray-400 rounded-lg px-2">
+              <label for="">Yes</label>
+            </div>
+            <div>
+              <input type="checkbox" id="hasac" name="hasac" class="border border-gray-400 rounded-lg px-2">
+              <label for="">No</label>
+            </div>
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="yearbuilt" >Year Built?</label>
+            <input required type="number" id="yearbuilt" name="yearbuilt" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex justify-between mb-4">
+          <label for="rentprice" >Rent Price</label>
+          <input required type="number" id="rentprice" name="rentprice" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex justify-between mb-4">
+          <label for="dateavailable" >Date Available</label>
+          <input required type="date" id="dateavailable" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex items-center justify-center mt-10">
+            <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50">Publish</button>
+        </div>
+    </form>
+</div>
+</MainLayout>

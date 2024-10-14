@@ -4,11 +4,11 @@ import MainLayout from "../layout/MainLayout.astro"
 
 <MainLayout>
   <div class="container mx-auto">
-    <h3 class="text-center text-indigo-700 text-3xl my-10">Your Favorite Flats</h3>
+    <h3 class="text-center text-indigo-700 text-3xl my-10">Discover New Flats</h3>
     <div >
         <table class="table-auto border-separate border-spacing-2 border border-slate-500 bg-indigo-700 rounded-lg  w-full">
             <thead>
-                <tr>
+                <tr class="text-center">
                   <th class="border border-slate-600 bg-white rounded-lg px-2">City</th>
                   <th class="border border-slate-600 bg-white rounded-lg px-2">Street Name</th>
                   <th class="border border-slate-600 bg-white rounded-lg px-2">Street Number</th>
@@ -17,6 +17,7 @@ import MainLayout from "../layout/MainLayout.astro"
                   <th class="border border-slate-600 bg-white rounded-lg px-2">Year Built?</th>
                   <th class="border border-slate-600 bg-white rounded-lg px-2">Rent Price</th>
                   <th class="border border-slate-600 bg-white rounded-lg px-2">Date Available</th>
+                  <th class="border border-slate-600 bg-white rounded-lg px-2">Favorite</th>
                 </tr>
               </thead>
               <tbody>
@@ -29,6 +30,7 @@ import MainLayout from "../layout/MainLayout.astro"
                     <td class="border border-slate-600 bg-white rounded-lg px-2">1990</td>
                     <td class="border border-slate-600 bg-white rounded-lg px-2">1000</td>
                     <td class="border border-slate-600 bg-white rounded-lg px-2">2022-10-10</td>
+                    <td class="border border-slate-600 bg-white rounded-lg px-2"><input type="checkbox"></td>
                 </tr>
                 <tr>
                     <td class="border border-slate-600 bg-white rounded-lg px-2">Barcelona</td>
@@ -39,6 +41,7 @@ import MainLayout from "../layout/MainLayout.astro"
                     <td class="border border-slate-600 bg-white rounded-lg px-2">1990</td>
                     <td class="border border-slate-600 bg-white rounded-lg px-2">1000</td>
                     <td class="border border-slate-600 bg-white rounded-lg px-2">2022-10-10</td>
+                    <td class="border border-slate-600 bg-white rounded-lg px-2"><input type="checkbox"></td>
                 </tr>
                 <tr>
                     <td class="border border-slate-600 bg-white rounded-lg px-2">Barcelona</td>
@@ -49,9 +52,48 @@ import MainLayout from "../layout/MainLayout.astro"
                     <td class="border border-slate-600 bg-white rounded-lg px-2">1990</td>
                     <td class="border border-slate-600 bg-white rounded-lg px-2">1000</td>
                     <td class="border border-slate-600 bg-white rounded-lg px-2">2022-10-10</td>
+                    <td class="border border-slate-600 bg-white rounded-lg px-2"><input type="checkbox"></td>
                 </tr>
               </tbody>
         </table>
     </div>
   </div>
 </MainLayout>
+<style>
+  input[type="checkbox"] {
+    width: 10px;
+    height: 10px;
+    -webkit-appearance: none;
+    background-color: red;
+    position: relative;
+    outline: none;
+    transform: rotate(45deg);
+    cursor: pointer;
+  }
+  input[type="checkbox"]:before {
+    position: absolute;
+    content: "";
+    background-color: red;
+    height: 60%;
+    width: 100%;
+    top: -59%;
+    border-radius: 75px 75px 0 0;
+  }
+  input[type="checkbox"]:after {
+    position: absolute;
+    content: "";
+    background-color: red;
+    height: 60%;
+    width: 100%;
+    transform: rotate(-90deg);
+    border-radius: 75px 75px 0 0;
+    top: 20%;
+    right: 79%;
+  }
+  input[type="checkbox"]:checked,
+  input:checked[type="checkbox"]:before,
+  input:checked[type="checkbox"]:after {
+    
+    background-color: #212121;
+  }
+</style>

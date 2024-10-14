@@ -1,0 +1,51 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+        <ViewTransitions />
+	</head>
+	<body class="bg-slate-100/50 ">
+        <header class="bg-indigo-700">
+            <div class="flex container justify-between items-center mx-auto h-20  p-2">
+                <div class="flex gap-4">
+                    <div>
+                        <a href="/">
+                            <img src="" alt="Astro" />
+                        </a>
+                    </div>
+                    <div>
+                        <a href="/"><h2 class="text-white">RentaHogar</h2></a>
+                    </div>
+                </div>
+                <div>
+                    <nav>
+                        <ul class="flex gap-8 text-white">
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="/allflats">All Flats</a>
+                            </li>
+                            <li>
+                                <a href="/newflat">New Flat</a>
+                            </li>
+                            <li>
+                                <a href="/login">Log In</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            
+        </header>
+		<slot />
+        
+	</body>
+</html>
