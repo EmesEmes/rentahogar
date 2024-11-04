@@ -1,23 +1,24 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+
+const { title } = Astro.props;
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>{title}</title>
         <ViewTransitions />
 	</head>
 	<body class="bg-slate-100/50 ">
         <header class="bg-indigo-700">
             <div class="flex container justify-between items-center mx-auto h-20  p-2">
-                <div class="flex gap-4">
-                    <div>
+                <div class="flex gap-4 items-center justify-center">
+                    <div class="">
                         <a href="/">
-                            <img src="" alt="Astro" />
+                            <img src="/images/3d-house.png" alt="Astro" class="w-[40px] h-[40px]"/>
                         </a>
                     </div>
                     <div>
@@ -36,7 +37,7 @@ import { ViewTransitions } from 'astro:transitions';
                             <li>
                                 <a href="/newflat">New Flat</a>
                             </li>
-                            <li>
+                            <li id="user">
                                 <a href="/login">Log In</a>
                             </li>
                         </ul>
@@ -46,6 +47,9 @@ import { ViewTransitions } from 'astro:transitions';
             
         </header>
 		<slot />
-        
+    <script src="../index.js" ></script>
 	</body>
 </html>
+
+<script src="../index.js"></script>
+

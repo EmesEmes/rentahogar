@@ -1,53 +1,220 @@
 ---
+import TextH3 from "../components/TextH3.astro"
 import MainLayout from "../layout/MainLayout.astro"
 ---
 
-<MainLayout>
-  <div class=" flex items-center flex-col w-[100%] ">
-    <h1 class="mt-10 font-bold text-3xl text-indigo-700">Publish a New Flat</h1>
-    <form id="publish-flat-form" class="flex flex-col mt-10 p-10 border-2 border-indigo-700 rounded-3xl bg-white">
+<MainLayout title="New Flat - RentaHogar">
+  <div class=" flex items-center flex-col w-[100%]" id="container-newflat">
+    <TextH3>Publish a flat</TextH3>
+    <form id="publish-flat-form" class="flex flex-col mt-4 p-10 border-2 border-indigo-700 rounded-3xl bg-white">
         <div class="flex justify-between mb-4">
             <label for="city" >City</label>
             <input required type="text" id="city" name="city" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
         </div>
         <div class="flex justify-between mb-4">
             <label for="streetname" >Street Name</label>
-            <input required type="text" id="streetname" name="streetname" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 ">
+            <input required type="text" id="streetname" name="street-name" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 ">
         </div>
         <div class="flex justify-between mb-4">
             <label for="streetnumber" >Street Number</label>
-            <input required type="number" id="streetnumber" name="streetnumber" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+            <input required type="number" id="streetnumber" name="street-number" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
         </div>
         <div class="flex justify-between mb-4">
             <label for="area" >Area size</label>
-            <input required type="number" id="area" name="area" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+            <input required type="number" id="area" name="area-size" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
         </div>
         <div class="flex justify-between mb-4">
-            <label for="hasac">Has AC?</label>
+            <label for="has-ac">Has AC?</label>
             <div>
-              <input type="checkbox" id="hasac" name="hasac" class="border border-gray-400 rounded-lg px-2">
+              <input type="radio" id="hasac" name="has-ac" class="border border-gray-400 rounded-lg px-2" value="yes">
               <label for="">Yes</label>
             </div>
             <div>
-              <input type="checkbox" id="hasac" name="hasac" class="border border-gray-400 rounded-lg px-2">
+              <input type="radio" id="hasac" name="has-ac" class="border border-gray-400 rounded-lg px-2" value="no">
               <label for="">No</label>
             </div>
         </div>
         <div class="flex justify-between mb-4">
-            <label for="yearbuilt" >Year Built?</label>
-            <input required type="number" id="yearbuilt" name="yearbuilt" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+            <label for="year-built" >Year Built?</label>
+            <input required type="number" id="yearbuilt" name="year-built" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
         </div>
         <div class="flex justify-between mb-4">
           <label for="rentprice" >Rent Price</label>
-          <input required type="number" id="rentprice" name="rentprice" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+          <input required type="number" id="rentprice" name="price" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
         </div>
         <div class="flex justify-between mb-4">
           <label for="dateavailable" >Date Available</label>
-          <input required type="date" id="dateavailable" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+          <input required type="date" id="date-available" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
         </div>
         <div class="flex items-center justify-center mt-10">
-            <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50">Publish</button>
+            <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50" type="submit">Save</button>
         </div>
     </form>
 </div>
+  <div id="table-myflats">
+    <TextH3>Your Published flats</TextH3>
+    <div class="container mx-auto mb-10">
+      <table class="table-auto border-separate border-spacing-2 border border-slate-500 bg-indigo-700 rounded-lg w-full" id="table">
+        <thead>
+            <tr class="text-center">
+              <th class="border border-slate-600 bg-white rounded-lg px-2">City</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Street Name</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Street Number</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Area size</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Has AC?</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Year Built?</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Rent Price</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Date Available</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+      </table>
+    </div>
+  </div>
+<div>
+  
+</div>
 </MainLayout>
+<script is:inline>
+  document.addEventListener('astro:page-load', ()=> {
+    const user_logged= JSON.parse(localStorage.getItem('currentUser'));
+    
+    if(!user_logged){
+      const div = document.getElementById('container-newflat');
+      const table = document.getElementById('table-myflats');
+      table.style.display = 'none';
+      div.innerHTML = '<h3 class="text-center text-indigo-700 text-3xl my-10 capitalize">You need to be logged in to publish a flat</h3>'
+
+    }
+    else {
+      const form = document.getElementById('publish-flat-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const date = new Date();
+      const flat = {
+          id: date.getTime(),
+          city: capitalize(form.elements['city'].value),
+          streetName: capitalize(form.elements['street-name'].value),
+          streetNumber: form.elements['street-number'].value,
+          hasAc: capitalize(form.elements['has-ac'].value),
+          areaSize: parseFloat(form.elements['area-size'].value),
+          price: parseFloat(form.elements['price'].value),
+          dateAvailable: form.elements['date-available'].value,
+          yearBuilt: form.elements['year-built'].value,
+          publishedBy: user_logged.email
+      }
+
+      const flats = JSON.parse(localStorage.getItem('flats'));
+      if (flats != null) {
+          flats.push(flat);
+          localStorage.setItem('flats', JSON.stringify(flats));
+          form.reset()
+          fillTable() 
+      } else {
+          localStorage.setItem('flats', JSON.stringify([flat]));
+          form.reset();
+          
+      }
+    })
+
+    const capitalize = (str) => {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    const fillTable = () => {
+      const user_logged= JSON.parse(localStorage.getItem('currentUser'));
+      const flats = JSON.parse(localStorage.getItem('flats'));
+      const tbody = document.querySelector('#table tbody');
+      tbody.innerHTML = '';
+      if (flats != null && Array.isArray(flats)) {
+        const filtered = flats.filter((item) => {
+          return item.publishedBy === user_logged.email
+        })
+        filtered.forEach((flat) => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = '' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.city + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.streetName + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.streetNumber + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.areaSize + ' m<sup>2</sup>' + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.hasAc + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.yearBuilt + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.price + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.dateAvailable + '</td>'
+
+          const tdEdit = document.createElement('td');
+          tdEdit.classList.add('border', 'border-slate-600', 'bg-white', 'rounded-lg', 'px-2');
+
+          const buttonEdit = document.createElement('button');
+          buttonEdit.classList.add('p-2', 'bg-indigo-700', 'border-2', 'border-transparent', 'text-white', 'hover:bg-white', 'hover:text-indigo-700', 'hover:border-indigo-700', 'rounded-lg', 'transition', 'duration-300', 'w-full', 'mb-2');
+          buttonEdit.innerText = 'Edit';
+
+          const buttonDelete = document.createElement('button');
+          buttonDelete.classList.add('p-2', 'bg-indigo-700', 'border-2', 'border-transparent', 'text-white', 'hover:bg-white', 'hover:text-indigo-700', 'hover:border-indigo-700', 'rounded-lg', 'transition', 'duration-300', 'w-full');
+          buttonDelete.innerText = 'Delete';
+
+          tdEdit.appendChild(buttonEdit);
+          tdEdit.appendChild(buttonDelete);
+          tr.appendChild(tdEdit);
+          
+          buttonEdit.onclick = () => editFlat(flat.id);
+          buttonDelete.onclick = () => deleteFlat(flat.id);
+          tbody.appendChild(tr);
+        })
+      }
+    }
+
+    const editFlat = (id) => {
+      const flats = JSON.parse(localStorage.getItem('flats'));
+      const flat = flats.find((item) => {
+        return item.id === id
+      })
+      const form = document.getElementById('publish-flat-form');
+      form.elements['city'].value = flat.city;
+      form.elements['street-name'].value = flat.streetName;
+      form.elements['street-number'].value = flat.streetNumber;
+      form.elements['has-ac'].value = flat.hasAc;
+      form.elements['area-size'].value = flat.areaSize;
+      form.elements['price'].value = flat.price;
+      form.elements['date-available'].value = flat.dateAvailable;
+      form.elements['year-built'].value = flat.yearBuilt;
+      
+      const index = flats.findIndex((item) => {
+          return item.id === id
+      })
+
+      flats.splice(index, 1);
+      localStorage.setItem('flats', JSON.stringify(flats));
+      fillTable();
+    }
+
+    const deleteFlat = (id) => {
+      const flats = JSON.parse(localStorage.getItem('flats'));
+      const index = flats.findIndex((item) => {
+        return item.id === id
+      })
+      flats.splice(index, 1);
+      localStorage.setItem('flats', JSON.stringify(flats));
+      fillTable();
+    }
+
+    fillTable();
+    }
+})
+
+  
+</script>
+
+
+<style>
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+
+  input[type=number] { -moz-appearance:textfield; }
+</style>

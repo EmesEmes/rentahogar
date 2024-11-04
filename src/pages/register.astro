@@ -24,11 +24,11 @@ import MainLayout from "../layout/MainLayout.astro";
             </div>
             <div class="flex justify-between mb-4">
                 <label for="password">Password</label>
-                <input required type="password" id="password" name="password" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+                <input required type="password" id="password" name="password" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
             </div>
             <div class="flex justify-between mb-4">
                 <label for="confpassword" >Confirm Password</label>
-                <input required type="password" id="confpassword" name="confpassword" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+                <input required type="password" id="confpassword" name="confpassword" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
             </div>
             <div class="flex items-center justify-center mt-10">
                 <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50">Create Account</button>
@@ -39,36 +39,39 @@ import MainLayout from "../layout/MainLayout.astro";
 
 
 <script is:inline>
-    const form = document.getElementById('register-form');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const form = e.target;
-        let usersArray = [];
-        const newUser = {
-            name: form.elements['name'].value,
-            lastname: form.elements['lastname'].value,
-            birthday: form.elements['birthday'].value,
-            email: form.elements['email'].value,
-            password: form.elements['password'].value,
-            confpassword: form.elements['confpassword'].value,
-            myFlats: [],
-            favFlats: []
-        }
-        form.reset()
-        saveUser(newUser);
+    document.addEventListener('astro:page-load', ()=> {
+        console.log("register.js loaded");
+        const form = document.getElementById('register-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const form = e.target;
+            let usersArray = [];
+            const newUser = {
+                name: form.elements['name'].value,
+                lastname: form.elements['lastname'].value,
+                birthday: form.elements['birthday'].value,
+                email: form.elements['email'].value,
+                password: form.elements['password'].value,
+                confpassword: form.elements['confpassword'].value,
+                myFlats: [],
+                favFlats: []
+            }
+            form.reset()
+            saveUser(newUser);
+            window.location.href = '/login';
+        });
 
-    });
-
-    function saveUser(user){
-        
-        const users = JSON.parse(localStorage.getItem('users'));
-        console.log(users)
-        if(users == null){
-            const arrayUsers = [user]
-            localStorage.setItem('users', JSON.stringify(arrayUsers));
-        } else {
-            users.push(user)
-            localStorage.setItem('users', JSON.stringify(users));
+        function saveUser(user){
+            
+            const users = JSON.parse(localStorage.getItem('users'));
+            
+            if(users == null){
+                const arrayUsers = [user]
+                localStorage.setItem('users', JSON.stringify(arrayUsers));
+            } else {
+                users.push(user)
+                localStorage.setItem('users', JSON.stringify(users));
+            }
         }
-    }
+    })
 </script>

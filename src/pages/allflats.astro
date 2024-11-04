@@ -1,99 +1,252 @@
 ---
+import TextH3 from "../components/TextH3.astro"
 import MainLayout from "../layout/MainLayout.astro"
 ---
 
-<MainLayout>
+<MainLayout title="All Flats - RentaHogar">
   <div class="container mx-auto">
-    <h3 class="text-center text-indigo-700 text-3xl my-10">Discover New Flats</h3>
+    <TextH3>Discover New Flats</TextH3>
+    <div class="flex mb-8 gap-4">
+      <div class="border-2 border-indigo-700 rounded-lg p-4 w-[70%] shadow-lg shadow-indigo-300">
+        <h2 class="text-center mb-4 text-indigo-700">Filters</h2>
+        <form id="form-filter" class="flex gap-4 justify-between">
+          
+          <input type="text" name="city" placeholder="city" class="p-2 border border-indigo-700 rounded-lg">
+          
+          <div class="flex justify-between items-center">
+              <input type="number" name="min-price" placeholder="Min Price" class="w-[49%] p-2 border border-indigo-700 rounded-lg"> 
+              <input type="number" name="max-price" placeholder="Max Price" class="w-[49%] p-2 border border-indigo-700 rounded-lg">
+          </div>
+          <input type="submit" value="Search" class="border-2 border-indigo-700 bg-indigo-700 text-white rounded-lg p-2 w-[100px] hover:border-indigo-700 hover:bg-transparent hover:text-indigo-700 transition duration-300">
+        </form>
+        <div class="flex items-center justify-center">
+          <button id="clean" class="mt-8 border-2 border-indigo-700 bg-indigo-700 text-white rounded-lg p-2 hover:border-indigo-700 hover:bg-transparent hover:text-indigo-700 transition duration-300">Clean Filters</button>
+        </div>
+      </div>
+      <div class="flex w-[30%] gap-4 items-center border-2 border-indigo-700 rounded-lg p-4 shadow-lg shadow-indigo-300">
+        <p class="text-center text-indigo-700">Order by:</p>
+        <button id="order" class="border-2 border-indigo-700 bg-indigo-700 text-white rounded-lg p-2 w-[100px] hover:border-indigo-700 hover:bg-transparent hover:text-indigo-700 transition duration-300">Ciudad</button>
+        <button id="filter" class="border-2 border-indigo-700 bg-indigo-700 text-white rounded-lg p-2 w-[100px] hover:border-indigo-700 hover:bg-transparent hover:text-indigo-700 transition duration-300">Precio</button>
+      </div>
+    </div>
     <div >
-        <table class="table-auto border-separate border-spacing-2 border border-slate-500 bg-indigo-700 rounded-lg  w-full">
-            <thead>
-                <tr class="text-center">
-                  <th class="border border-slate-600 bg-white rounded-lg px-2">City</th>
-                  <th class="border border-slate-600 bg-white rounded-lg px-2">Street Name</th>
-                  <th class="border border-slate-600 bg-white rounded-lg px-2">Street Number</th>
-                  <th class="border border-slate-600 bg-white rounded-lg px-2">Area size</th>
-                  <th class="border border-slate-600 bg-white rounded-lg px-2">Has AC?</th>
-                  <th class="border border-slate-600 bg-white rounded-lg px-2">Year Built?</th>
-                  <th class="border border-slate-600 bg-white rounded-lg px-2">Rent Price</th>
-                  <th class="border border-slate-600 bg-white rounded-lg px-2">Date Available</th>
-                  <th class="border border-slate-600 bg-white rounded-lg px-2">Favorite</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">Barcelona</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">Diagonal</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">123</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">100</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">Yes</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">1990</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">1000</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">2022-10-10</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2"><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">Barcelona</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">Diagonal</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">123</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">100</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">Yes</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">1990</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">1000</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">2022-10-10</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2"><input type="checkbox"></td>
-                </tr>
-                <tr>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">Barcelona</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">Diagonal</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">123</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">100</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">Yes</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">1990</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">1000</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2">2022-10-10</td>
-                    <td class="border border-slate-600 bg-white rounded-lg px-2"><input type="checkbox"></td>
-                </tr>
-              </tbody>
-        </table>
+      <table class="table-auto border-separate border-spacing-2 border border-slate-500 bg-indigo-700 rounded-lg w-full" id="table">
+        <thead>
+            <tr class="text-center">
+              <th class="border border-slate-600 bg-white rounded-lg px-2">City</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Street Name</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Street Number</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Area size</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Has AC?</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Year Built?</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Rent Price</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Date Available</th>
+              <th class="border border-slate-600 bg-white rounded-lg px-2">Favorite</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+    </table>
     </div>
   </div>
 </MainLayout>
-<style>
-  input[type="checkbox"] {
-    width: 10px;
-    height: 10px;
-    -webkit-appearance: none;
-    background-color: red;
-    position: relative;
-    outline: none;
-    transform: rotate(45deg);
-    cursor: pointer;
-  }
-  input[type="checkbox"]:before {
-    position: absolute;
-    content: "";
-    background-color: red;
-    height: 60%;
-    width: 100%;
-    top: -59%;
-    border-radius: 75px 75px 0 0;
-  }
-  input[type="checkbox"]:after {
-    position: absolute;
-    content: "";
-    background-color: red;
-    height: 60%;
-    width: 100%;
-    transform: rotate(-90deg);
-    border-radius: 75px 75px 0 0;
-    top: 20%;
-    right: 79%;
-  }
-  input[type="checkbox"]:checked,
-  input:checked[type="checkbox"]:before,
-  input:checked[type="checkbox"]:after {
+
+
+<script is:inline>
+  document.addEventListener('astro:page-load', ()=> {
     
-    background-color: #212121;
+
+
+    let current_table = [];
+    
+    const fillTable = (flats = null) => {
+        
+        const tbody = document.querySelector('#table tbody');
+        tbody.innerHTML = '';
+        if (flats == null) {
+            flats = JSON.parse(localStorage.getItem('flats'));
+        }
+        
+        current_table = flats;
+        
+        if (flats!= null && Array.isArray(flats)) {
+            flats.forEach((flat)=>{
+                const tr = document.createElement('tr');
+                tr.innerHTML = '' +
+                    '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.city + '</td>' +
+                    '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.streetName + '</td>' +
+                    '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.streetNumber + '</td>' +
+                    '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.areaSize +' m<sup>2</sup>'+ '</td>' +
+                    '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.hasAc + '</td>' +
+                    '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.yearBuilt + '</td>' + 
+                    '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.price + '</td>' +
+                    '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.dateAvailable + '</td>' 
+                    
+                    
+                
+                const tdAdd = document.createElement('td');
+                tdAdd.classList.add('border','border-slate-600','bg-white','rounded-lg','px-2');
+                const button = document.createElement('button');
+                button.classList.add('p-2','bg-indigo-700','border-2','border-transparent','text-white','hover:bg-white','hover:text-indigo-700','hover:border-indigo-700','rounded-lg','transition','duration-300', 'w-full');
+                
+                button.onclick = (e) => toggleFavorite(flat.id,e);
+                button.innerText = (checkFlatFavorite(flat.id))?'Remove':'Add'
+                
+                tdAdd.appendChild(button);
+                
+                tr.appendChild(tdAdd);
+                
+                tbody.appendChild(tr);
+            });
+        }
+        
+        
+    }
+
+    const checkFlatFavorite = (id) => {
+    const flats_favorites = JSON.parse(localStorage.getItem('flats_favorites'));
+    if (flats_favorites != null) {
+        const exist = flats_favorites.findIndex((item)=>{
+            return item.idFlat === id
+        })
+        if (exist !== -1){
+            return true;
+        }
+        
+    }
+    return false;
+}
+
+    const toggleFavorite = (id,e) => {
+    const user_logged = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user_logged){
+        alert('You must be logged in to add a favorite');
+        return;
+    }
+    
+    const email = user_logged.email
+    
+    const favorite = {
+        idFlat:id,
+        emailUser:email
+    }
+    const flats_favorites = JSON.parse(localStorage.getItem('flats_favorites'));
+    if (flats_favorites == null) {
+        const flats_favorites = [favorite];
+        localStorage.setItem('flats_favorites', JSON.stringify(flats_favorites));
+    }else{
+        const exist =  flats_favorites.findIndex((item)=>{
+            return item.idFlat === id
+        })
+        if (exist === -1){
+            flats_favorites.push(favorite);
+            e.target.textContent = 'Remove';
+        }else{
+            flats_favorites.splice(exist, 1);
+            e.target.textContent = 'Add';
+        }
+       
+        localStorage.setItem('flats_favorites', JSON.stringify(flats_favorites));
+    }
+}
+const filterTable = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const city = capitalize(form.elements['city'].value);
+    let minPrince = form.elements['min-price'].value;
+    const maxPrice = form.elements['max-price'].value;
+    
+    
+    
+    
+    
+    const flats = JSON.parse(localStorage.getItem('flats'));
+    if (flats!= null && Array.isArray(flats)) {
+        
+        const flatsFiltered = flats.filter((flat)=>{
+            if (city){
+                if ( city !== flat.city){
+                    form.reset();
+                    return false;
+                }
+            }
+            
+            if (!minPrince){
+                minPrince = 0;
+            }
+            
+            if(maxPrice){
+                
+                if (parseFloat(minPrince) > parseFloat(flat.price ) || 
+                    parseFloat(maxPrice) < parseFloat(flat.price)){
+                    form.reset();
+                    return false;
+                }
+            }else{
+               if (parseFloat(minPrince) > parseFloat(flat.price )) {
+                    form.reset();
+                    return false;
+               }
+            }
+            form.reset();
+            return true;
+        })
+        
+        fillTable(flatsFiltered)
+    }
+    
+    
+}
+
+const orderTable =(column)=>{
+    
+    if (current_table && Array.isArray(current_table)){
+        
+        const tableSorted = current_table.sort((a,b)=>{
+            if (a[column] > b[column]){
+                return 1;
+            }
+            if (a[column] < b[column]){
+                return -1;
+            }
+            return 0;
+
+        });
+
+        fillTable(tableSorted);
+    }
+    
+    
+} 
+
+    const cleanFilters = () => {
+        fillTable();
+    }
+    const buttonClean = document.querySelector('#clean');
+    const buttonOrder = document.querySelector('#order');
+    const buttonFilter = document.querySelector('#filter');
+    const formFilter = document.querySelector('#form-filter');
+
+    buttonClean.onclick = cleanFilters;
+    buttonOrder.onclick = () => orderTable('city');
+    buttonFilter.onclick = () => orderTable('price');
+    formFilter.onsubmit = filterTable;
+    fillTable();
+
+
+    const capitalize = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+  })
+</script>
+
+<style>
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
   }
+
+  input[type=number] { -moz-appearance:textfield; }
 </style>

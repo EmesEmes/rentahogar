@@ -1,0 +1,21 @@
+---
+import TextH3 from "../components/TextH3.astro";
+import MainLayout from "../layout/MainLayout.astro";
+
+
+---
+<MainLayout>
+    <div class="container mx-auto">
+      <TextH3>Your Profile</TextH3>
+      <button id="closeSession">Close Session</button>
+    </div>
+</MainLayout>
+<script>
+    document.addEventListener('astro:page-load', () => {
+      const buttonCloseSession = document.getElementById('closeSession');
+      buttonCloseSession.addEventListener('click', () => {
+        localStorage.removeItem('currentUser');
+        window.location.href = '/';
+      })
+    })
+</script>

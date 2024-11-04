@@ -12,10 +12,11 @@ import MainLayout from "../layout/MainLayout.astro"
       </div>
       <div class="flex justify-between mb-4">
         <label for="">Contraseña</label>
-        <input required type="password" name="password" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        <input required type="password" name="password" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
       </div>
+      <p class="text-red-400 text-sm hidden" id="message">Invalid email or password</p>
       <div class="flex items-center justify-center mt-10">
-        <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50">Log In</button>
+        <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50 w-full" type="submit">Log In</button>
     </div>
     </form>
     <p class="text-sm text-right mt-6">don't have an account? <span class="text-indigo-700"><a href="/register">Register here</a></span></p>
@@ -24,17 +25,32 @@ import MainLayout from "../layout/MainLayout.astro"
 
 
 <script is:inline>
-  const formLogin = document.getElementById('login-form')
-  formLogin.addEventListener('submit'), (e) => {
-    e.preventDefault()
-    const users = JSON.parse(localStorage.getItem('users'))
-    
-    if(users ==! null) {
-      const user = users.find(user => user.email === form.elements['email'].value && user.password === form.elements['password'].value)
+  document.addEventListener('astro:page-load', () => {
+    console.log("Login page loaded");
+    const formLogin = document.getElementById('login-form')
+    formLogin.addEventListener('submit', (e) => {
+      e.preventDefault()
+      const users = JSON.parse(localStorage.getItem('users'))
       
+      if (users !== null) {
+        const user = users.find(user => user.email === formLogin.elements['email'].value && user.password === formLogin.elements['password'].value);
+        if (user) {
+          console.log("Login successful");
+          // Redirect to the homepage or another page
+          window.location.href = '/';
+          localStorage.setItem('currentUser', JSON.stringify(user));
+        } else {
+          const message = document.getElementById('message')
+          message.classList.remove('hidden')
+          formLogin.reset()
+        }
+      } else {
+        console.log("No users found");
+        const message = document.getElementById('message')
+        message.classList.remove('hidden')
+        formLogin.reset()
+      }
       
-      window.location.href = '/index'
-      
-    }
-  }
-</script>
+    })
+  })
+</script>s
