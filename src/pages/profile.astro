@@ -4,18 +4,148 @@ import MainLayout from "../layout/MainLayout.astro";
 
 
 ---
-<MainLayout>
-    <div class="container mx-auto">
-      <TextH3>Your Profile</TextH3>
-      <button id="closeSession">Close Session</button>
-    </div>
+<MainLayout title="Profile | RentaHogar">
+  <div class=" flex items-center flex-col w-[100%] mb-20">
+    <TextH3>Your profile</TextH3>
+    <form id='form-profile' class="flex flex-col p-10 border-2 border-indigo-700 rounded-3xl bg-white">
+        <div class="flex justify-between mb-4">
+            <label for="name" >First Name</label>
+            <input type="text" id="name" name="name" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="lastname" >Last Name</label>
+            <input type="text" id="lastname" name="lastname" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 ">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="birthday" >Birthday</label>
+            <input type="date" id="birthday" name="birthday" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="email" >Email</label>
+            <input disabled type="email" id="email" name="email" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 text-indigo-700/50">
+        </div>
+        <div>
+            <p id="message" class="text-red-400 text-sm hidden"></p>
+        </div>
+        <div class="flex items-center justify-center mt-10">
+            <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50">Change</button>
+        </div>
+    </form>
+</div>
+<div class="flex items-center flex-col w-[100%]">
+  <TextH3>Change password</TextH3>
+  <form id="form-password" class="flex flex-col p-10 border-2 border-indigo-700 rounded-3xl bg-white">
+    <div class="flex justify-between mb-4">
+      <label for="password">Current Password</label>
+      <input type="password" id="current-password" name="password" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+  </div>
+    <div class="flex justify-between mb-4">
+      <label for="password">New Password</label>
+      <input type="password" id="new-password" name="password" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+  </div>
+  <div class="flex justify-between mb-4">
+      <label for="confpassword" >Confirm New Password</label>
+      <input type="password" id="confpassword" name="confpassword" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+  </div>
+  <div>
+    <p id="message-pass" class="text-red-400 text-sm hidden"></p>
+</div>
+<div class="flex items-center justify-center mt-10">
+    <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50">Change</button>
+</div>
+  </form>
+</div>
 </MainLayout>
 <script>
     document.addEventListener('astro:page-load', () => {
-      const buttonCloseSession = document.getElementById('closeSession');
-      buttonCloseSession.addEventListener('click', () => {
-        localStorage.removeItem('currentUser');
-        window.location.href = '/';
+      const form = document.getElementById('form-profile') as any;
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      const users = JSON.parse(localStorage.getItem('users'));
+
+      form.elements['name'].value = user.name;
+      form.elements['lastname'].value = user.lastname;
+      form.elements['email'].value = user.email;
+      form.elements['birthday'].value = user.birthday;
+
+      const formPassword = document.getElementById('form-password') as any;
+
+
+      form.addEventListener('submit', (e: any) => {
+        e.preventDefault();
+        changeData();
       })
+
+      formPassword.addEventListener('submit', (e: any) => {
+        e.preventDefault();
+        changePassword();
+      })
+
+      const changeData = () => {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const users = JSON.parse(localStorage.getItem('users'));
+
+        const name = form.elements['name'].value;
+        const lastname = form.elements['lastname'].value;
+        const birthday = form.elements['birthday'].value;
+        const email = form.elements['email'].value;
+
+        const newUser = {
+          ...user,
+          name,
+          lastname,
+          birthday,
+          email,
+          password: user.password 
+        }
+
+        const newUsers = users.map((u: any) => {
+          if (u.email === user.email) {
+        return newUser;
+          }
+          return u;
+        })
+
+        localStorage.setItem('currentUser', JSON.stringify(newUser));
+        localStorage.setItem('users', JSON.stringify(newUsers));
+      }
+
+      const changePassword = () => {
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const users = JSON.parse(localStorage.getItem('users'));
+
+        const currentPassword = formPassword.elements['current-password'].value;
+        const newPassword = formPassword.elements['new-password'].value;
+        const confPassword = formPassword.elements['confpassword'].value;
+
+        if (currentPassword !== user.password) {
+          document.getElementById('message-pass').innerText = 'Current password is incorrect';
+          document.getElementById('message-pass').classList.remove('hidden');
+          formPassword.reset()
+          return;
+        }
+
+        if (newPassword !== confPassword) {
+          document.getElementById('message-pass').innerText = 'Passwords do not match';
+          document.getElementById('message-pass').classList.remove('hidden');
+          formPassword.reset()
+          return;
+        }
+
+        const newUser = {
+          ...user,
+          password: newPassword
+        }
+
+        const newUsers = users.map((u: any) => {
+          if (u.email === user.email) {
+            formPassword.reset()
+            return newUser;
+          }
+          return u;
+        })
+
+        localStorage.setItem('currentUser', JSON.stringify(newUser));
+        localStorage.setItem('users', JSON.stringify(newUsers));
+      }
     })
 </script>

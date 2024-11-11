@@ -1,8 +1,8 @@
 ---
-
+const {id} = Astro.props;
 ---
 
-<table class="table-auto border-separate border-spacing-2 border border-slate-500 bg-indigo-700 rounded-lg w-full table-index" id="table">
+<table class="table-auto border-separate border-spacing-2 border border-slate-500 bg-indigo-700 rounded-lg w-full max-md:min-w-[1000px]" id={id}>
     <thead>
         <tr class="text-center">
           <th class="border border-slate-600 bg-white rounded-lg px-2">City</th>

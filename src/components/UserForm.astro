@@ -1,0 +1,40 @@
+---
+import TextH3 from "./TextH3.astro";
+
+const {id} = Astro.props
+---
+<div class=" flex items-center flex-col w-[100%] ">
+    <TextH3>Your profile</TextH3>
+    <form id={id} class="flex flex-col mt-10 p-10 border-2 border-indigo-700 rounded-3xl bg-white">
+        <div class="flex justify-between mb-4">
+            <label for="name" >First Name</label>
+            <input type="text" id="name" name="name" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="lastname" >Last Name</label>
+            <input type="text" id="lastname" name="lastname" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 ">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="birthday" >Birthday</label>
+            <input type="date" id="birthday" name="birthday" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="email" >Email</label>
+            <input type="email" id="email" name="email" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div class="flex justify-between mb-4">
+            <label for="confpassword" >Confirm Password</label>
+            <input type="password" id="confpassword" name="confpassword" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+        </div>
+        <div>
+            <p id="message" class="text-red-400 text-sm hidden"></p>
+        </div>
+        <div class="flex items-center justify-center mt-10">
+            <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50">Create Account</button>
+        </div>
+    </form>
+</div>

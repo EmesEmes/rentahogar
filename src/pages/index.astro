@@ -8,84 +8,16 @@ import MainLayout from "../layout/MainLayout.astro"
 
 ---
 
-<MainLayout>
-  <div class="container mx-auto">
+<MainLayout title="Home | RentaHogar">
+  <div class="container mx-auto overflow-x-hidden p-4" id="container-index">
     <TextH3>your favorite flats</TextH3>
-    <button class="text-sm cursor-pointer mb-4 text-blue-600" id="show-grid">show grid</button>
-    <div >
-      <table class="table-auto border-separate border-spacing-2 border border-slate-500 bg-indigo-700 rounded-lg w-full table-index" id="table-index">
-        <thead>
-            <tr class="text-center">
-              <th class="border border-slate-600 bg-white rounded-lg px-2">City</th>
-              <th class="border border-slate-600 bg-white rounded-lg px-2">Street Name</th>
-              <th class="border border-slate-600 bg-white rounded-lg px-2">Street Number</th>
-              <th class="border border-slate-600 bg-white rounded-lg px-2">Area size</th>
-              <th class="border border-slate-600 bg-white rounded-lg px-2">Has AC?</th>
-              <th class="border border-slate-600 bg-white rounded-lg px-2">Year Built?</th>
-              <th class="border border-slate-600 bg-white rounded-lg px-2">Rent Price</th>
-              <th class="border border-slate-600 bg-white rounded-lg px-2">Date Available</th>
-              <th class="border border-slate-600 bg-white rounded-lg px-2">Favorite</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-          </tbody>
-    </table>
+    <button class="text-sm cursor-pointer mb-4 text-blue-600 dark:text-white underline flex items-center gap-1" id="show-grid"><span><img class="h-[16px]" src="/images/grid-blue.svg" alt=""></span>Show grid</button>
+    <div class="overflow-x-auto">
+      <Table id="table-index"/>
     </div>
   </div>
-  <div class="hidden grid-cols-3 gap-4 container mx-auto mt-10" id="grid">
-    <div class="border-2 border-indigo-700 rounded-xl p-4">
-      <img src="/images/ejemplo.jpg" alt="casa ejemplo" class="rounded-xl">
-      <div class="flex flex-col my-4">
-        <p class="text-indigo-700 font-bold text-xl">City: <span  class="text-black font-normal">Barcelona</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Street: <span  class="text-black font-normal">Diagonal</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Street Number: <span  class="text-black font-normal">123</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Area size: <span  class="text-black font-normal">100</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Has AC: <span  class="text-black font-normal">Yes</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Year Built: <span  class="text-black font-normal">1990</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Rent Price: <span  class="text-black font-normal">1000</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Date Available: <span  class="text-black font-normal">2022-10-10</span></p>
-        
-        <div class="flex items-center justify-center mt-10">
-          <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50">Read More</button>
-        </div>
-      </div>
-    </div>
-    <div class="border-2 border-indigo-700 rounded-xl p-4">
-      <img src="/images/ejemplo.jpg" alt="casa ejemplo" class="rounded-xl">
-      <div class="flex flex-col my-4">
-        <p class="text-indigo-700 font-bold text-xl">City: <span  class="text-black font-normal">Barcelona</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Street: <span  class="text-black font-normal">Diagonal</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Street Number: <span  class="text-black font-normal">123</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Area size: <span  class="text-black font-normal">100</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Has AC: <span  class="text-black font-normal">Yes</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Year Built: <span  class="text-black font-normal">1990</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Rent Price: <span  class="text-black font-normal">1000</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Date Available: <span  class="text-black font-normal">2022-10-10</span></p>
-        
-        <div class="flex items-center justify-center mt-10">
-          <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50">Read More</button>
-        </div>
-      </div>
-    </div>
-    <div class="border-2 border-indigo-700 rounded-xl p-4">
-      <img src="/images/ejemplo.jpg" alt="casa ejemplo" class="rounded-xl">
-      <div class="flex flex-col my-4">
-        <p class="text-indigo-700 font-bold text-xl">City: <span  class="text-black font-normal">Barcelona</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Street: <span  class="text-black font-normal">Diagonal</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Street Number: <span  class="text-black font-normal">123</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Area size: <span  class="text-black font-normal">100</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Has AC: <span  class="text-black font-normal">Yes</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Year Built: <span  class="text-black font-normal">1990</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Rent Price: <span  class="text-black font-normal">1000</span></p>
-        <p class="text-indigo-700 font-bold text-xl">Date Available: <span  class="text-black font-normal">2022-10-10</span></p>
-        
-        <div class="flex items-center justify-center mt-10">
-          <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50">Read More</button>
-        </div>
-      </div>
-    </div>
-    <Card />
+  <div class="hidden grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-4 container mx-auto" id="grid">
+    
   </div>
 </MainLayout>
 <script src="../index.js"></script>
@@ -94,7 +26,6 @@ import MainLayout from "../layout/MainLayout.astro"
 <script>
   document.addEventListener('astro:page-load', ()=> {
 
-    const card = document.getElementById('card-component');
     const showGrid = document.getElementById('show-grid');
     const grid = document.getElementById('grid');
     const table = document.getElementById('table-index');
@@ -103,14 +34,25 @@ import MainLayout from "../layout/MainLayout.astro"
       grid.classList.toggle('hidden');
       grid.classList.toggle('grid');
       table.classList.toggle('hidden');
-      showGrid.textContent = grid.classList.contains('hidden') ? 'show grid' : 'show table';
+      showGrid.innerHTML = grid.classList.contains('hidden') ? '<span><img class="h-[16px]" src="/images/grid-blue.svg" alt=""></span>Show grid' : '<span><img class="h-[16px]" src="/images/table-blue.svg" alt=""></span>Show table';
     });
 
+
+    const user_logged= JSON.parse(localStorage.getItem('currentUser'));
+
+    if(!user_logged){
+      const div = document.getElementById('container-index');
+      const table = document.getElementById('table-index');
+      table.style.display = 'none';
+      div.innerHTML = '<h3 class="text-center text-indigo-700 text-3xl my-10 capitalize">You need to be logged to see your favorite flats</h3>'
+
+    }
     const fillTable = () =>{
     const user_logged= JSON.parse(localStorage.getItem('currentUser'));
     const favorites = JSON.parse(localStorage.getItem('flats_favorites'));
     const flats = JSON.parse(localStorage.getItem('flats'));
     const tbody = document.querySelector('#table-index tbody');
+    const grid = document.getElementById('grid');
     tbody.innerHTML = '';
     
     if (favorites && Array.isArray(favorites)){ 
@@ -128,18 +70,17 @@ import MainLayout from "../layout/MainLayout.astro"
         flatsTable.forEach((flat)=>{
           const tr = document.createElement('tr');
           tr.innerHTML = '' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.city + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.streetName + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.streetNumber + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.hasAc + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.areaSize + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.price + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.dateAvailable + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.yearBuilt + '</td>' 
+            '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.city + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.streetName + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.streetNumber + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.hasAc + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.areaSize + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.price + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.dateAvailable + '</td>' +
+            '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.yearBuilt + '</td>' 
         
           const tdRemove = document.createElement('td');
           tdRemove.classList.add('border','border-slate-600','bg-white','rounded-lg','px-2');
-          console.log(tdRemove)
           const button = document.createElement('button');
           
           button.classList.add('p-2','bg-indigo-700','border-2','border-transparent','text-white','hover:bg-white','hover:text-indigo-700','hover:border-indigo-700','rounded-lg','transition','duration-300', 'w-full');
@@ -150,8 +91,36 @@ import MainLayout from "../layout/MainLayout.astro"
 
           tr.appendChild(tdRemove);
 
+
+          const divCard = document.createElement('div');
+          divCard.classList.add('border-2','border-indigo-700','rounded-xl','p-4', 'dark:bg-indigo-700');
+          divCard.id = 'card-component';
+          divCard.innerHTML = `
+            <img src="/images/houses/${flat.image}.jpg" alt="casa ejemplo" class="rounded-xl">
+            <div class="flex flex-col my-4">
+              <p class="text-indigo-700 font-bold text-xl dark:text-white">City: <span  class="text-black font-normal">${flat.city}</span></p>
+              <p class="text-indigo-700 font-bold text-xl dark:text-white">Street: <span  class="text-black font-normal">${flat.streetName}</span></p>
+              <p class="text-indigo-700 font-bold text-xl dark:text-white">Street Number: <span  class="text-black font-normal">${flat.streetNumber}</span></p>
+              <p class="text-indigo-700 font-bold text-xl dark:text-white">Area size: <span  class="text-black font-normal">${flat.areaSize}</span></p>
+              <p class="text-indigo-700 font-bold text-xl dark:text-white">Has AC: <span  class="text-black font-normal">${flat.hasAc}</span></p>
+              <p class="text-indigo-700 font-bold text-xl dark:text-white">Year Built: <span  class="text-black font-normal">${flat.yearBuilt}</span></p>
+              <p class="text-indigo-700 font-bold text-xl dark:text-white">Rent Price: <span  class="text-black font-normal">${flat.price}</span></p>
+              <p class="text-indigo-700 font-bold text-xl dark:text-white">Date Available: <span  class="text-black font-normal">${flat.dateAvailable}</span></p>
+              <div class="flex items-center justify-center mt-10">
+                
+              </div>
+            </div>
+          `;
+
+
+
           tbody.appendChild(tr);
+          grid.appendChild(divCard);
         });
+      } if(flatsTable.length === 0) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td colspan="8" class="text-center text-white text-3xl my-10 capitalize">You have no favorite flats</td>';
+        tbody.appendChild(tr);
       }
             
         
@@ -171,6 +140,7 @@ import MainLayout from "../layout/MainLayout.astro"
   }
     fillTable();
   })
+  
   
   
 </script>

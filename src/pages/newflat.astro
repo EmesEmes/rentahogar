@@ -1,27 +1,28 @@
 ---
 import TextH3 from "../components/TextH3.astro"
 import MainLayout from "../layout/MainLayout.astro"
+
 ---
 
-<MainLayout title="New Flat - RentaHogar">
-  <div class=" flex items-center flex-col w-[100%]" id="container-newflat">
+<MainLayout title="New Flat | RentaHogar">
+  <div class=" flex items-center flex-col w-[100%] overflow-x-hidden p-4" id="container-newflat">
     <TextH3>Publish a flat</TextH3>
-    <form id="publish-flat-form" class="flex flex-col mt-4 p-10 border-2 border-indigo-700 rounded-3xl bg-white">
+    <form id="publish-flat-form" class="flex flex-col mt-4 p-10 border-2 border-indigo-700 rounded-3xl dark:bg-indigo-700 dark:text-white dark:border-white">
         <div class="flex justify-between mb-4">
             <label for="city" >City</label>
-            <input required type="text" id="city" name="city" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+            <input required type="text" id="city" name="city" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2  text-black">
         </div>
         <div class="flex justify-between mb-4">
             <label for="streetname" >Street Name</label>
-            <input required type="text" id="streetname" name="street-name" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 ">
+            <input required type="text" id="streetname" name="street-name" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2  text-black">
         </div>
         <div class="flex justify-between mb-4">
             <label for="streetnumber" >Street Number</label>
-            <input required type="number" id="streetnumber" name="street-number" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+            <input required type="number" id="streetnumber" name="street-number" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 text-black">
         </div>
         <div class="flex justify-between mb-4">
             <label for="area" >Area size</label>
-            <input required type="number" id="area" name="area-size" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+            <input required type="number" id="area" name="area-size" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 text-black">
         </div>
         <div class="flex justify-between mb-4">
             <label for="has-ac">Has AC?</label>
@@ -36,24 +37,24 @@ import MainLayout from "../layout/MainLayout.astro"
         </div>
         <div class="flex justify-between mb-4">
             <label for="year-built" >Year Built?</label>
-            <input required type="number" id="yearbuilt" name="year-built" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+            <input required type="number" id="yearbuilt" name="year-built" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 text-black">
         </div>
         <div class="flex justify-between mb-4">
           <label for="rentprice" >Rent Price</label>
-          <input required type="number" id="rentprice" name="price" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+          <input required type="number" id="rentprice" name="price" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 text-black">
         </div>
         <div class="flex justify-between mb-4">
           <label for="dateavailable" >Date Available</label>
-          <input required type="date" id="date-available" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+          <input required type="date" id="date-available" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 text-black">
         </div>
         <div class="flex items-center justify-center mt-10">
-            <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50" type="submit">Save</button>
+            <button class="p-4 w-[100px] bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50 dark:bg-white dark:text-indigo-700 dark:shadow-white/50 dark:hover:bg-indigo-700 dark:hover:border-white dark:hover:text-white" type="submit">Save</button>
         </div>
     </form>
 </div>
-  <div id="table-myflats">
+  <div id="table-myflats" class="overflow-x-hidden">
     <TextH3>Your Published flats</TextH3>
-    <div class="container mx-auto mb-10">
+    <div class="container mx-auto mb-10 overflow-x-scroll">
       <table class="table-auto border-separate border-spacing-2 border border-slate-500 bg-indigo-700 rounded-lg w-full" id="table">
         <thead>
             <tr class="text-center">
@@ -78,10 +79,15 @@ import MainLayout from "../layout/MainLayout.astro"
   
 </div>
 </MainLayout>
-<script is:inline>
+<script is:inline type="module">
+  import Swal from '../../node_modules/sweetalert2';
+  
   document.addEventListener('astro:page-load', ()=> {
+    
+    const Swalex = Swal;
     const user_logged= JSON.parse(localStorage.getItem('currentUser'));
     
+
     if(!user_logged){
       const div = document.getElementById('container-newflat');
       const table = document.getElementById('table-myflats');
@@ -91,40 +97,52 @@ import MainLayout from "../layout/MainLayout.astro"
     }
     else {
       const form = document.getElementById('publish-flat-form');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const date = new Date();
-      const flat = {
-          id: date.getTime(),
-          city: capitalize(form.elements['city'].value),
-          streetName: capitalize(form.elements['street-name'].value),
-          streetNumber: form.elements['street-number'].value,
-          hasAc: capitalize(form.elements['has-ac'].value),
-          areaSize: parseFloat(form.elements['area-size'].value),
-          price: parseFloat(form.elements['price'].value),
-          dateAvailable: form.elements['date-available'].value,
-          yearBuilt: form.elements['year-built'].value,
-          publishedBy: user_logged.email
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const date = new Date();
+        const flat = {
+            id: date.getTime(),
+            city: capitalize(form.elements['city'].value),
+            streetName: capitalize(form.elements['street-name'].value),
+            streetNumber: form.elements['street-number'].value,
+            hasAc: capitalize(form.elements['has-ac'].value),
+            areaSize: parseFloat(form.elements['area-size'].value),
+            price: parseFloat(form.elements['price'].value),
+            dateAvailable: form.elements['date-available'].value,
+            yearBuilt: form.elements['year-built'].value,
+            publishedBy: user_logged.email,
+            image: getRandomNumber()
+        }
+
+        const flats = JSON.parse(localStorage.getItem('flats'));
+        if (flats != null) {
+            flats.push(flat);
+            localStorage.setItem('flats', JSON.stringify(flats));
+            form.reset()
+            fillTable() 
+            Swalex.fire({
+              title: 'Flat published',
+              text: 'You can now see your flat in the table',
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            })
+        } else {
+            localStorage.setItem('flats', JSON.stringify([flat]));
+            form.reset();
+            Swalex.fire({
+              title: 'Flat published',
+              text: 'You can now see your flat in the table',
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            })
+        }
+      })
+
+      const capitalize = (str) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
       }
 
-      const flats = JSON.parse(localStorage.getItem('flats'));
-      if (flats != null) {
-          flats.push(flat);
-          localStorage.setItem('flats', JSON.stringify(flats));
-          form.reset()
-          fillTable() 
-      } else {
-          localStorage.setItem('flats', JSON.stringify([flat]));
-          form.reset();
-          
-      }
-    })
-
-    const capitalize = (str) => {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-
-    const fillTable = () => {
+      const fillTable = () => {
       const user_logged= JSON.parse(localStorage.getItem('currentUser'));
       const flats = JSON.parse(localStorage.getItem('flats'));
       const tbody = document.querySelector('#table tbody');
@@ -134,38 +152,39 @@ import MainLayout from "../layout/MainLayout.astro"
           return item.publishedBy === user_logged.email
         })
         filtered.forEach((flat) => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = '' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.city + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.streetName + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.streetNumber + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.areaSize + ' m<sup>2</sup>' + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.hasAc + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.yearBuilt + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.price + '</td>' +
-            '<td class="border border-slate-600 bg-white rounded-lg px-2">' + flat.dateAvailable + '</td>'
+            const tr = document.createElement('tr');
+            tr.innerHTML = '' +
+              '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.city + '</td>' +
+              '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.streetName + '</td>' +
+              '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.streetNumber + '</td>' +
+              '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.areaSize + ' m<sup>2</sup>' + '</td>' +
+              '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.hasAc + '</td>' +
+              '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.yearBuilt + '</td>' +
+              '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.price + '</td>' +
+              '<td class="border border-slate-600 bg-white rounded-lg px-2 dark:bg-transparent dark:text-white dark:border-white">' + flat.dateAvailable + '</td>'
 
-          const tdEdit = document.createElement('td');
-          tdEdit.classList.add('border', 'border-slate-600', 'bg-white', 'rounded-lg', 'px-2');
+            const tdEdit = document.createElement('td');
+            tdEdit.classList.add('border', 'border-slate-600', 'bg-white', 'rounded-lg', 'px-2');
 
-          const buttonEdit = document.createElement('button');
-          buttonEdit.classList.add('p-2', 'bg-indigo-700', 'border-2', 'border-transparent', 'text-white', 'hover:bg-white', 'hover:text-indigo-700', 'hover:border-indigo-700', 'rounded-lg', 'transition', 'duration-300', 'w-full', 'mb-2');
-          buttonEdit.innerText = 'Edit';
+            const buttonEdit = document.createElement('button');
+            buttonEdit.classList.add('p-2', 'bg-indigo-700', 'border-2', 'border-transparent', 'text-white', 'hover:bg-white', 'hover:text-indigo-700', 'hover:border-indigo-700', 'rounded-lg', 'transition', 'duration-300', 'w-full', 'mb-2');
+            buttonEdit.innerText = 'Edit';
 
-          const buttonDelete = document.createElement('button');
-          buttonDelete.classList.add('p-2', 'bg-indigo-700', 'border-2', 'border-transparent', 'text-white', 'hover:bg-white', 'hover:text-indigo-700', 'hover:border-indigo-700', 'rounded-lg', 'transition', 'duration-300', 'w-full');
-          buttonDelete.innerText = 'Delete';
+            const buttonDelete = document.createElement('button');
+            buttonDelete.classList.add('p-2', 'bg-indigo-700', 'border-2', 'border-transparent', 'text-white', 'hover:bg-white', 'hover:text-indigo-700', 'hover:border-indigo-700', 'rounded-lg', 'transition', 'duration-300', 'w-full');
+            buttonDelete.innerText = 'Delete';
 
-          tdEdit.appendChild(buttonEdit);
-          tdEdit.appendChild(buttonDelete);
-          tr.appendChild(tdEdit);
+            tdEdit.appendChild(buttonEdit);
+            tdEdit.appendChild(buttonDelete);
+            tr.appendChild(tdEdit);
+            
+            buttonEdit.onclick = () => editFlat(flat.id);
+            buttonDelete.onclick = () => deleteFlat(flat.id);
+            tbody.appendChild(tr);
           
-          buttonEdit.onclick = () => editFlat(flat.id);
-          buttonDelete.onclick = () => deleteFlat(flat.id);
-          tbody.appendChild(tr);
-        })
+          })
+        }
       }
-    }
 
     const editFlat = (id) => {
       const flats = JSON.parse(localStorage.getItem('flats'));
@@ -192,17 +211,48 @@ import MainLayout from "../layout/MainLayout.astro"
     }
 
     const deleteFlat = (id) => {
-      const flats = JSON.parse(localStorage.getItem('flats'));
-      const index = flats.findIndex((item) => {
-        return item.id === id
-      })
-      flats.splice(index, 1);
-      localStorage.setItem('flats', JSON.stringify(flats));
-      fillTable();
+      
+      // Swal.fire({
+      //   title: 'Flat deleted',
+      //   text: 'You can no longer see your flat in the table',
+      //   icon: 'success',
+      //   confirmButtonText: 'Ok'
+      // })
+      Swalex.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const flats = JSON.parse(localStorage.getItem('flats'));
+          const index = flats.findIndex((item) => {
+            return item.id === id
+          })
+          flats.splice(index, 1);
+          localStorage.setItem('flats', JSON.stringify(flats));
+          fillTable();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        }
+      });
     }
 
+    
+
     fillTable();
+    
     }
+    function getRandomNumber() {
+    return Math.floor(Math.random() * 10) + 1;
+  }
+    
 })
 
   
@@ -217,4 +267,5 @@ import MainLayout from "../layout/MainLayout.astro"
   }
 
   input[type=number] { -moz-appearance:textfield; }
+
 </style>
