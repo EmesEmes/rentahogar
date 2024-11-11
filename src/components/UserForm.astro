@@ -1,10 +1,10 @@
 ---
 import TextH3 from "./TextH3.astro";
 
-const {id} = Astro.props
+const {id, title} = Astro.props
 ---
 <div class=" flex items-center flex-col w-[100%] ">
-    <TextH3>Your profile</TextH3>
+    <TextH3>{title}</TextH3>
     <form id={id} class="flex flex-col mt-10 p-10 border-2 border-indigo-700 rounded-3xl bg-white">
         <div class="flex justify-between mb-4">
             <label for="name" >First Name</label>

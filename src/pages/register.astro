@@ -5,38 +5,39 @@ import MainLayout from "../layout/MainLayout.astro";
 <MainLayout>
     <div class=" flex items-center flex-col w-[100%] ">
         <h1 class="mt-10 font-bold text-3xl text-indigo-700">Register</h1>
-        <form id="register-form" class="flex flex-col mt-10 p-10 border-2 border-indigo-700 rounded-3xl bg-white">
+        <form id="register-form" class="flex flex-col mt-10 p-10 border-2 border-indigo-700 rounded-3xl bg-white dark:bg-indigo-700 dark:text-white dark:border-white">
             <div class="flex justify-between mb-4">
                 <label for="name" >First Name</label>
-                <input type="text" id="name" name="name" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+                <input type="text" id="name" name="name" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 dark:text-black">
             </div>
             <div class="flex justify-between mb-4">
                 <label for="lastname" >Last Name</label>
-                <input type="text" id="lastname" name="lastname" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 ">
+                <input type="text" id="lastname" name="lastname" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2  dark:text-black">
             </div>
             <div class="flex justify-between mb-4">
                 <label for="birthday" >Birthday</label>
-                <input type="date" id="birthday" name="birthday" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+                <input type="date" id="birthday" name="birthday" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 dark:text-black">
             </div>
             <div class="flex justify-between mb-4">
                 <label for="email" >Email</label>
-                <input type="email" id="email" name="email" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+                <input type="email" id="email" name="email" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 dark:text-black">
             </div>
             <div class="flex justify-between mb-4">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+                <input type="password" id="password" name="password" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 dark:text-black">
             </div>
             <div class="flex justify-between mb-4">
                 <label for="confpassword" >Confirm Password</label>
-                <input type="password" id="confpassword" name="confpassword" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2">
+                <input type="password" id="confpassword" name="confpassword" autocomplete="on" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 dark:text-black">
             </div>
             <div>
                 <p id="message" class="text-red-400 text-sm hidden"></p>
             </div>
             <div class="flex items-center justify-center mt-10">
-                <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50">Create Account</button>
+                <button class="p-4 bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50 dark:bg-white dark:text-indigo-700 dark:shadow-white/50 dark:hover:bg-indigo-700 dark:hover:border-white dark:hover:text-white">Create Account</button>
             </div>
         </form>
+        <p class="text-sm text-right mt-6 dark:text-white">alredy have an account? <span class="text-indigo-300 underline"><a href="/login">Login here</a></span></p>
     </div>
 </MainLayout>
 

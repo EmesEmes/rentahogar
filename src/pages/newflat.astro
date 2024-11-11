@@ -1,12 +1,13 @@
 ---
 import TextH3 from "../components/TextH3.astro"
 import MainLayout from "../layout/MainLayout.astro"
+import FlatForm from "../components/FlatForm.astro"
 
 ---
 
 <MainLayout title="New Flat | RentaHogar">
-  <div class=" flex items-center flex-col w-[100%] overflow-x-hidden p-4" id="container-newflat">
-    <TextH3>Publish a flat</TextH3>
+  <div class="flex items-center flex-col w-[100%] overflow-x-hidden p-4" id="container-newflat">
+    <TextH3>Publish new flat</TextH3>
     <form id="publish-flat-form" class="flex flex-col mt-4 p-10 border-2 border-indigo-700 rounded-3xl dark:bg-indigo-700 dark:text-white dark:border-white">
         <div class="flex justify-between mb-4">
             <label for="city" >City</label>
@@ -51,7 +52,10 @@ import MainLayout from "../layout/MainLayout.astro"
             <button class="p-4 w-[100px] bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50 dark:bg-white dark:text-indigo-700 dark:shadow-white/50 dark:hover:bg-indigo-700 dark:hover:border-white dark:hover:text-white" type="submit">Save</button>
         </div>
     </form>
+    
 </div>
+  
+  
   <div id="table-myflats" class="overflow-x-hidden">
     <TextH3>Your Published flats</TextH3>
     <div class="container mx-auto mb-10 overflow-x-scroll">
@@ -73,9 +77,58 @@ import MainLayout from "../layout/MainLayout.astro"
             
           </tbody>
       </table>
+      
     </div>
   </div>
 <div>
+  
+</div>
+<div class="flex items-center flex-col w-[100%] overflow-x-hidden p-4 hidden" id="container-edit">
+  <TextH3>Publish new flat</TextH3>
+  <form id="edit-flat-form" class="flex flex-col mt-4 p-10 border-2 border-indigo-700 rounded-3xl dark:bg-indigo-700 dark:text-white dark:border-white">
+      <div class="flex justify-between mb-4">
+          <label for="city" >City</label>
+          <input required type="text" id="city" name="city" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2  text-black">
+      </div>
+      <div class="flex justify-between mb-4">
+          <label for="streetname" >Street Name</label>
+          <input required type="text" id="streetname" name="street-name" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2  text-black">
+      </div>
+      <div class="flex justify-between mb-4">
+          <label for="streetnumber" >Street Number</label>
+          <input required type="number" id="streetnumber" name="street-number" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 text-black">
+      </div>
+      <div class="flex justify-between mb-4">
+          <label for="area" >Area size</label>
+          <input required type="number" id="area" name="area-size" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 text-black">
+      </div>
+      <div class="flex justify-between mb-4">
+          <label for="has-ac">Has AC?</label>
+          <div>
+            <input type="radio" id="hasac" name="has-ac" class="border border-gray-400 rounded-lg px-2" value="yes">
+            <label for="">Yes</label>
+          </div>
+          <div>
+            <input type="radio" id="hasac" name="has-ac" class="border border-gray-400 rounded-lg px-2" value="no">
+            <label for="">No</label>
+          </div>
+      </div>
+      <div class="flex justify-between mb-4">
+          <label for="year-built" >Year Built?</label>
+          <input required type="number" id="yearbuilt" name="year-built" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 text-black">
+      </div>
+      <div class="flex justify-between mb-4">
+        <label for="rentprice" >Rent Price</label>
+        <input required type="number" id="rentprice" name="price" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 text-black">
+      </div>
+      <div class="flex justify-between mb-4">
+        <label for="dateavailable" >Date Available</label>
+        <input required type="date" id="date-available" class="ml-4 w-[200px] border border-gray-400 rounded-lg px-2 text-black">
+      </div>
+      <div class="flex items-center justify-center mt-10">
+          <button class="p-4 w-[100px] bg-indigo-700 border-2 border-transparent text-white hover:bg-white hover:text-indigo-700 hover:border-indigo-700 rounded-xl transition duration-300 shadow-lg shadow-indigo-500/50 dark:bg-white dark:text-indigo-700 dark:shadow-white/50 dark:hover:bg-indigo-700 dark:hover:border-white dark:hover:text-white" type="submit">Save</button>
+      </div>
+  </form>
   
 </div>
 </MainLayout>
@@ -129,6 +182,7 @@ import MainLayout from "../layout/MainLayout.astro"
         } else {
             localStorage.setItem('flats', JSON.stringify([flat]));
             form.reset();
+            fillTable()
             Swalex.fire({
               title: 'Flat published',
               text: 'You can now see your flat in the table',
@@ -187,37 +241,63 @@ import MainLayout from "../layout/MainLayout.astro"
       }
 
     const editFlat = (id) => {
+  
       const flats = JSON.parse(localStorage.getItem('flats'));
       const flat = flats.find((item) => {
         return item.id === id
       })
-      const form = document.getElementById('publish-flat-form');
-      form.elements['city'].value = flat.city;
-      form.elements['street-name'].value = flat.streetName;
-      form.elements['street-number'].value = flat.streetNumber;
-      form.elements['has-ac'].value = flat.hasAc;
-      form.elements['area-size'].value = flat.areaSize;
-      form.elements['price'].value = flat.price;
-      form.elements['date-available'].value = flat.dateAvailable;
-      form.elements['year-built'].value = flat.yearBuilt;
-      
-      const index = flats.findIndex((item) => {
-          return item.id === id
+
+      const div = document.getElementById('container-edit');
+      div.classList.remove('hidden');
+
+      const formEdit = document.getElementById('edit-flat-form');
+      formEdit.elements['city'].value = flat.city;
+      formEdit.elements['street-name'].value = flat.streetName;
+      formEdit.elements['street-number'].value = flat.streetNumber;
+      formEdit.elements['area-size'].value = flat.areaSize;
+      formEdit.elements['year-built'].value = flat.yearBuilt;
+      formEdit.elements['price'].value = flat.price;
+      formEdit.elements['date-available'].value = flat.dateAvailable;
+      formEdit.elements['has-ac'].value = flat.hasAc;
+
+      formEdit.addEventListener('submit', (e) => {
+        e.preventDefault();
+        saveData();
+        
       })
 
-      flats.splice(index, 1);
-      localStorage.setItem('flats', JSON.stringify(flats));
-      fillTable();
+      const saveData =() => {
+        const flat = {
+          id: id,
+          city: capitalize(formEdit.elements['city'].value),
+          streetName: capitalize(formEdit.elements['street-name'].value),
+          streetNumber: formEdit.elements['street-number'].value,
+          hasAc: capitalize(formEdit.elements['has-ac'].value),
+          areaSize: parseFloat(formEdit.elements['area-size'].value),
+          price: parseFloat(formEdit.elements['price'].value),
+          dateAvailable: formEdit.elements['date-available'].value,
+          yearBuilt: formEdit.elements['year-built'].value,
+          publishedBy: user_logged.email,
+          image: getRandomNumber()
+        }
+        const index = flats.findIndex((item) => {
+          return item.id === id
+        })
+        flats[index] = flat;
+        localStorage.setItem('flats', JSON.stringify(flats));
+        fillTable();
+        div.classList.add('hidden');
+        Swalex.fire({
+          title: 'Flat updated',
+          text: 'You can now see your flat in the table',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        })
+      }
     }
 
     const deleteFlat = (id) => {
       
-      // Swal.fire({
-      //   title: 'Flat deleted',
-      //   text: 'You can no longer see your flat in the table',
-      //   icon: 'success',
-      //   confirmButtonText: 'Ok'
-      // })
       Swalex.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -257,6 +337,7 @@ import MainLayout from "../layout/MainLayout.astro"
 
   
 </script>
+
 
 
 <style>

@@ -12,18 +12,22 @@ import MainLayout from "../layout/MainLayout.astro"
   <div class="container mx-auto overflow-x-hidden p-4" id="container-index">
     <TextH3>your favorite flats</TextH3>
     <button class="text-sm cursor-pointer mb-4 text-blue-600 dark:text-white underline flex items-center gap-1" id="show-grid"><span><img class="h-[16px]" src="/images/grid-blue.svg" alt=""></span>Show grid</button>
+    <p id="message-grid" ></p>
     <div class="overflow-x-auto">
       <Table id="table-index"/>
     </div>
-  </div>
-  <div class="hidden grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-4 container mx-auto" id="grid">
+    <div class="hidden grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 gap-4 container mx-auto" id="grid">
     
+    </div>
   </div>
+  
+  
 </MainLayout>
 <script src="../index.js"></script>
 
 
-<script>
+<script type="module" is:inline>
+  import Swal from '../../node_modules/sweetalert2';
   document.addEventListener('astro:page-load', ()=> {
 
     const showGrid = document.getElementById('show-grid');
@@ -91,7 +95,38 @@ import MainLayout from "../layout/MainLayout.astro"
 
           tr.appendChild(tdRemove);
 
+          tbody.appendChild(tr);
 
+        });
+      } if(flatsTable.length === 0) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = '<td colspan="8" class="text-center text-white text-3xl my-10 capitalize">You have no favorite flats</td>';
+        tbody.appendChild(tr);
+      }
+            
+        
+    } 
+  } 
+
+  const fillGrid = () => {
+        const user_logged= JSON.parse(localStorage.getItem('currentUser'));
+        const favorites = JSON.parse(localStorage.getItem('flats_favorites'));
+        const flats = JSON.parse(localStorage.getItem('flats'));
+        const grid = document.getElementById('grid');
+        grid.innerHTML = '';
+        if (favorites && Array.isArray(favorites)){ 
+      const filtered = favorites.filter((item)=>{
+          return  item.emailUser === user_logged.email
+      
+      })
+      const flatsTable = filtered.map( (item)=>{
+          const id = item.idFlat;
+          return flats.find((flat)=> {
+              return flat.id === id
+          })
+      })
+      if (flatsTable!= null && Array.isArray(flatsTable)) {
+        flatsTable.forEach((flat)=>{
           const divCard = document.createElement('div');
           divCard.classList.add('border-2','border-indigo-700','rounded-xl','p-4', 'dark:bg-indigo-700');
           divCard.id = 'card-component';
@@ -112,20 +147,36 @@ import MainLayout from "../layout/MainLayout.astro"
             </div>
           `;
 
+          const divRemove = document.createElement('div');
+          const buttonDiv = document.createElement('button');
+          
+          buttonDiv.classList.add('p-2','bg-indigo-700','dark:bg-white', 'dark:text-indigo-700', 'border-2','border-transparent','text-white','hover:bg-white','hover:text-indigo-700','hover:border-indigo-700','rounded-lg','transition','duration-300', 'w-full');
+          buttonDiv.textContent = 'Remove';
+          buttonDiv.onclick = () => addFavorite(flat.id);
+          
+          divRemove.appendChild(buttonDiv);
+
+          divCard.appendChild(divRemove);
 
 
-          tbody.appendChild(tr);
           grid.appendChild(divCard);
         });
-      } if(flatsTable.length === 0) {
-        const tr = document.createElement('tr');
-        tr.innerHTML = '<td colspan="8" class="text-center text-white text-3xl my-10 capitalize">You have no favorite flats</td>';
-        tbody.appendChild(tr);
+      } 
+      if(flatsTable.length === 0) {
+        const p = document.createElement('p');
+        const ip = document.createElement('p');
+        p.innerHTML = '<p class="text-center text-indigo-700 text-3xl my-10 capitalize dark:text-white col-span-3">You have no favorite flats</p>';
+        grid.appendChild(ip);
+        grid.appendChild(p);
+        console.log(grid)
       }
             
         
     }
-    
+        
+
+    } 
+
     function addFavorite(id){
         const favorites = JSON.parse(localStorage.getItem('flats_favorites'));
         const index = favorites.findIndex((item)=>{
@@ -133,12 +184,19 @@ import MainLayout from "../layout/MainLayout.astro"
         })
         favorites.splice(index,1);
         localStorage.setItem('flats_favorites',JSON.stringify(favorites));
+        Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Flat removed from favorites",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
         fillTable();
+        fillGrid();
     }
-    
-    
-  }
+  
     fillTable();
+    fillGrid()
   })
   
   

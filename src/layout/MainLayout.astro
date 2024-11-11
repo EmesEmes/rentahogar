@@ -68,8 +68,12 @@ const { title } = Astro.props;
                         </ul>
                     </nav>
                 </div>
-                <div class="max-md:hidden">
-                    <a href="/login"id="user" class="text-white">Log In</a>
+                <div class="max-md:hidden relative">
+                    <button id="user" class="text-white user-button">Log In</button>
+                    <!-- <div id="div-submenu" class="flex flex-col absolute text-white bg-indigo-700 w-full mt-4 border-2 border-white p-2 gap-4">
+                        <a href="/profile" class="text-center">Profile</a>
+                        <button>Log Out</button>
+                    </div> -->
                 </div>
                 <div class="md:hidden"  id="menu">
                     <button><span><img src="/images/menu.svg" alt="menu" id="menu-icon"></span></button>
@@ -116,6 +120,7 @@ const { title } = Astro.props;
 </html>
 
 <script src="../index.js"></script>
+
 
 <style>
     body {
