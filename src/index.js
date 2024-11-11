@@ -62,6 +62,14 @@ document.addEventListener('astro:page-load',() => {
         localStorage.removeItem('currentUser');
         window.location.href = '/';
     });
+
+    const buttonLogout = document.querySelector('#button-logout');
+    buttonLogout.addEventListener('click', () => {
+        localStorage.removeItem('currentUser');
+        window.location.href = '/';
+    });
+
+    
     
 
 })

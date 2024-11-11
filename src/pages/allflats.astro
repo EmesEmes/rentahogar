@@ -141,7 +141,13 @@ import MainLayout from "../layout/MainLayout.astro"
             flats_favorites.splice(exist, 1);
             e.target.textContent = 'Add';
         }
-       
+        Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Action Complete",
+                    showConfirmButton: false,
+                    timer: 1000
+                });
         localStorage.setItem('flats_favorites', JSON.stringify(flats_favorites));
     }
 }
@@ -175,7 +181,7 @@ const filterTable = (event) => {
                 
                 if (parseFloat(minPrince) > parseFloat(flat.price ) || 
                     parseFloat(maxPrice) < parseFloat(flat.price)){
-                    form.reset();
+                    // form.reset();
                     return false;
                 }
             }else{
@@ -216,6 +222,8 @@ const orderTable =(column)=>{
 } 
 
     const cleanFilters = () => {
+        const form = document.getElementById('form-filter');
+        form.reset()
         fillTable();
     }
     const buttonClean = document.querySelector('#clean');

@@ -56,9 +56,10 @@ import MainLayout from "../layout/MainLayout.astro";
   </form>
 </div>
 </MainLayout>
-<script>
+<script type="module" is:inline>
+    import Swal from '../../node_modules/sweetalert2';
     document.addEventListener('astro:page-load', () => {
-      const form = document.getElementById('form-profile') as any;
+      const form = document.getElementById('form-profile');
       const user = JSON.parse(localStorage.getItem('currentUser'));
       const users = JSON.parse(localStorage.getItem('users'));
 
@@ -67,15 +68,15 @@ import MainLayout from "../layout/MainLayout.astro";
       form.elements['email'].value = user.email;
       form.elements['birthday'].value = user.birthday;
 
-      const formPassword = document.getElementById('form-password') as any;
+      const formPassword = document.getElementById('form-password');
 
 
-      form.addEventListener('submit', (e: any) => {
+      form.addEventListener('submit', (e) => {
         e.preventDefault();
         changeData();
       })
 
-      formPassword.addEventListener('submit', (e: any) => {
+      formPassword.addEventListener('submit', (e) => {
         e.preventDefault();
         changePassword();
       })
@@ -98,13 +99,19 @@ import MainLayout from "../layout/MainLayout.astro";
           password: user.password 
         }
 
-        const newUsers = users.map((u: any) => {
+        const newUsers = users.map((u) => {
           if (u.email === user.email) {
         return newUser;
           }
           return u;
         })
-
+        Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Profile updated",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
         localStorage.setItem('currentUser', JSON.stringify(newUser));
         localStorage.setItem('users', JSON.stringify(newUsers));
       }
@@ -136,14 +143,20 @@ import MainLayout from "../layout/MainLayout.astro";
           password: newPassword
         }
 
-        const newUsers = users.map((u: any) => {
+        const newUsers = users.map((u) => {
           if (u.email === user.email) {
             formPassword.reset()
             return newUser;
           }
           return u;
         })
-
+        Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Password updated",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
         localStorage.setItem('currentUser', JSON.stringify(newUser));
         localStorage.setItem('users', JSON.stringify(newUsers));
       }
